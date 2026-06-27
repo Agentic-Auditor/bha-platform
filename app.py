@@ -13,7 +13,8 @@ from flask_limiter.util import get_remote_address
 
 from db import get_db, init_db
 from scoring import calculate_score, DIM_QUESTIONS, ALL_DIMENSIONS
-from narratives import get_narrative, get_roadmap, get_kpi_table, get_benchmark
+from narratives import (get_narrative, get_roadmap, get_kpi_table, get_benchmark,
+                        DIM_FULL_NAMES, hard_floor_items)
 from report_model import assemble_report_model
 import email_service
 
@@ -350,13 +351,41 @@ def get_free_results(assessment_id):
     if not model:
         return jsonify({"error": "Results not found. Run /calculate first."}), 404
 
+    # Free-tier "teasers" — enough to be genuinely useful AND create urgency,
+    # while the prescription (root cause, actions, roadmap, KPI) stays paid.
+    # (1) up to 2 hard-floor danger signals (readable, not just a red light)
+    hard_floors = hard_floor_items(model.get("red_flags"), 2)
+    # (2) the "ผลกระทบหากไม่ปรับปรุง" (consequence) of the top 2 risks
+    top_risk_consequences = []
+    for d in (model.get("top_risks") or [])[:2]:
+        n = (model.get("narratives") or {}).get(d) or {}
+        if n.get("consequence"):
+            top_risk_consequences.append({
+                "dim": d,
+                "dim_name": DIM_FULL_NAMES.get(d, d),
+                "summary": n.get("summary", ""),
+                "consequence": n.get("consequence", ""),
+            })
+    # (3) make it explicit what the paid report unlocks
+    locked_features = [
+        "แผนปฏิบัติ 90 วัน (Roadmap) เรียงตามความเร่งด่วน",
+        "แผนแก้ไขเชิงลึกรายมิติ — สาเหตุที่แท้จริง + สิ่งที่ต้องลงมือทำ",
+        "ระบบ KPI ติดตามผลรายมิติ พร้อมเกณฑ์เตือนและวันเริ่มติดตาม",
+        "Benchmark เทียบกับธุรกิจประเภทเดียวกัน",
+        "รายงาน PDF ฉบับเต็ม ส่งเข้าอีเมล",
+    ]
+
     return jsonify({
         "overall_score": model["overall_score"],
         "overall_grade": model["overall_grade"],
+        "business_name": model.get("business_name", ""),
         "dim_light": model["dim_light"],
         "dim_pct": model["dim_pct"],
         "top_risks": model["top_risks"],
         "summaries": model["summaries"],
+        "hard_floors": hard_floors,
+        "top_risk_consequences": top_risk_consequences,
+        "locked_features": locked_features,
     })
 
 

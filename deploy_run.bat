@@ -2,28 +2,18 @@
 title BHA Deploy
 cd /d "%~dp0"
 (
-echo CWD=%cd%
-echo --- clearing stale git locks ---
 del /f /q /s ".git\*.lock" 2>nul
-git --version
-echo --- init ---
-git init
-git branch -M main
-git config user.email "agenticauditor24@gmail.com"
-git config user.name "Agentic Auditor"
+echo --- untrack sandbox junk ---
+git rm -r --cached --quiet ".fuse_hidden*" 2>nul
+git rm --cached --quiet _deploy_out.txt _deploy_out2.txt _mount_test.txt deploy_run.bat deploy_verify.bat 2>nul
 echo --- add ---
 git add -A
 echo --- commit ---
-git commit -m "deploy: BHA backend update (golden, phase-2, strict validation, KPI start-date, observability, AA branding/logo, CI)"
-echo --- remote ---
-git remote remove origin
-git remote add origin https://github.com/Agentic-Auditor/bha-platform.git
+git commit -m "feat: free-results teasers (hard-floor warnings, top-risk consequences, unlock framing) + AA dashboard header; chore: drop sandbox .fuse_hidden junk"
 echo --- push force ---
 git push -u origin main --force
 echo --- EXIT %errorlevel% ---
 ) > _deploy_out.txt 2>&1
 type _deploy_out.txt | clip
-type _deploy_out.txt
-echo.
 echo (Output copied to clipboard.)
 pause

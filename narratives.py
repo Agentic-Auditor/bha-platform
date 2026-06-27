@@ -1480,3 +1480,41 @@ BENCHMARK_SOURCES = [
 
 def get_benchmark_sources():
     return list(BENCHMARK_SOURCES)
+
+
+# ══════════════════════════════════════════════════════════════════
+# Hard-floor (red-flag) one-liners — single source of truth, shared by
+# the paid PDF's "สัญญาณอันตราย" box and the FREE results danger box.
+# dim -> (dimension name, plain-language reason). Reasons map to the
+# scoring.RED_FLAG_QUESTIONS that force a dimension RED.
+# ══════════════════════════════════════════════════════════════════
+HARD_FLOOR_LABELS = {
+    "D1": ("การเงินและสภาพคล่อง", "ยังไม่รู้กำไร–ขาดทุนรายเดือน จึงมองไม่เห็นสุขภาพการเงินที่แท้จริง"),
+    "D2": ("ลูกค้าและการตลาด", "รายได้กระจุกตัวอยู่กับลูกค้าน้อยราย เสี่ยงสูงหากเสียลูกค้าหลัก"),
+    "D3": ("ระบบงานและกระบวนการ", "ธุรกิจพึ่งพาเจ้าของเกือบทั้งหมด หยุดชะงักทันทีหากเจ้าของไม่อยู่"),
+    "D4": ("ทีมและทรัพยากรมนุษย์", "มีบุคคลสำคัญที่ขาดไม่ได้และยังไม่มีคนสำรอง (Key Person Risk)"),
+    "D5": ("ซัพพลายเชนและต้นทุน", "พึ่งซัพพลายเออร์/ผู้ให้บริการรายเดียวโดยไม่มีทางเลือกสำรอง"),
+    "D6": ("เทคโนโลยีและนวัตกรรม", "ไม่มีระบบสำรองข้อมูล/ความปลอดภัย เสี่ยงข้อมูลสูญหายหรือรั่วไหล"),
+    "D7": ("ธรรมาภิบาลและความเสี่ยง", "ยังไม่มีการควบคุมการเข้าถึงเงินหรือป้องกันการทุจริตอย่างเพียงพอ"),
+}
+
+
+def hard_floor_items(red_flags, limit=2):
+    """Return up to `limit` readable hard-floor warnings for the danger box.
+
+    `red_flags` is the list from scoring (bare dim codes like ["D1","D5"], but
+    tolerant of strings that merely contain a code). Returns
+    [{"dim","name","reason"}, …] de-duplicated and capped at `limit`.
+    """
+    out = []
+    seen = set()
+    for code in (red_flags or []):
+        dim = next((d for d in HARD_FLOOR_LABELS if d in str(code)), None)
+        if not dim or dim in seen:
+            continue
+        seen.add(dim)
+        name, reason = HARD_FLOOR_LABELS[dim]
+        out.append({"dim": dim, "name": name, "reason": reason})
+        if len(out) >= limit:
+            break
+    return out

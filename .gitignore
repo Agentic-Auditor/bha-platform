@@ -27,3 +27,14 @@ for_dev/
 
 # Generated report samples (dev artifacts)
 BHA_v2_*.pdf
+
+# Sandbox/FUSE + temp artifacts (must never be committed)
+.fuse_hidden*
+_deploy_out*.txt
+_mount_test.txt
+_es_verify.py
+_verify_snippet.py
+deploy_run.bat
+deploy_verify.bat
+push_log*.txt
+gitout*.txt
