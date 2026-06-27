@@ -1,0 +1,39 @@
+name: tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+
+    # Fail loud on any HIGH report-invariant violation at generation time.
+    # In production this guard is fail-soft; CI opts into strict mode.
+    env:
+      BHA_STRICT_VALIDATION: "1"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run unit suite (strict validation + coverage)
+        # pytest.ini auto-excludes the live-server test_bugfixes.py.
+        # The golden baseline + invariants + scoring + phase-2 + AI-path +
+        # report-model guards all run, with coverage on the testable core.
+        run: >
+          pytest -q
+          --cov=scoring --cov=narratives --cov=pdf_report
+          --cov=report_validate --cov=report_model
+          --cov-report=term-missing

@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+.env
+*.db
+*.db-wal
+*.db-shm
+venv/
+.venv/
+
+# Node
+frontend/node_modules/
+frontend/.next/
+frontend/.env.local
+frontend/.env*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dev
+slips/
+for_dev/
+*.log
+
+# Generated report samples (dev artifacts)
+BHA_v2_*.pdf

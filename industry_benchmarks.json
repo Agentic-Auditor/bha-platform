@@ -1,0 +1,464 @@
+{
+  "_schema": "industry_benchmarks/v1",
+  "_dimension_map": {
+    "D1": "finance",
+    "D2": "customer_marketing",
+    "D3": "operations",
+    "D4": "team_hr",
+    "D5": "supply_chain_cost",
+    "D6": "technology",
+    "D7": "governance_risk"
+  },
+  "_dimension_names_th": {
+    "D1": "การเงินและสภาพคล่อง",
+    "D2": "ลูกค้าและการตลาด",
+    "D3": "ระบบงานและกระบวนการ",
+    "D4": "ทีมและทรัพยากรมนุษย์",
+    "D5": "ซัพพลายเชนและต้นทุน",
+    "D6": "เทคโนโลยีและนวัตกรรม",
+    "D7": "ธรรมาภิบาลและความเสี่ยง"
+  },
+  "profiles": {
+    "default": {
+      "industry_id": "default",
+      "industry_name": "ทั่วไป",
+      "weights": {
+        "D1": 0.2,
+        "D2": 0.15,
+        "D3": 0.15,
+        "D4": 0.1,
+        "D5": 0.1,
+        "D6": 0.1,
+        "D7": 0.2
+      },
+      "dimensions": {
+        "D1": {
+          "benchmark_context": "ธุรกิจขนาดเล็กถือเงินสดสำรองมัธยฐานเพียง ~27 วัน ขณะที่กลุ่มแข็งแรงสุด 25% ถือไว้ 62 วันขึ้นไป — ควรตั้งเป้าสำรองค่าใช้จ่ายคงที่ 2–3 เดือน",
+          "source_ref": "JPMorgan Chase Institute",
+          "kpi_rules": [
+            {
+              "kpi_name": "Cash Runway",
+              "target_condition": "> 90 วัน",
+              "warning_condition": "< 60 วัน",
+              "tracking_frequency": "รายสัปดาห์"
+            },
+            {
+              "kpi_name": "Gross Margin",
+              "target_condition": "> 50%",
+              "warning_condition": "< 30%",
+              "tracking_frequency": "รายเดือน"
+            },
+            {
+              "kpi_name": "Revenue MoM Growth",
+              "target_condition": "> 5%",
+              "warning_condition": "< 0% ติดต่อกัน 2 เดือน",
+              "tracking_frequency": "รายเดือน"
+            }
+          ]
+        },
+        "D2": {
+          "benchmark_context": "อัตราซื้อซ้ำเฉลี่ยอยู่ที่ ~28% (เกณฑ์ดี 20–40%) และการหาลูกค้าใหม่มีต้นทุนสูงกว่าการรักษาลูกค้าเดิม 5–25 เท่า การเพิ่ม retention 5% เพิ่มกำไรได้ 25–95%",
+          "source_ref": "Bain & Company; LoyaltyLion",
+          "kpi_rules": [
+            {
+              "kpi_name": "Repeat Purchase Rate",
+              "target_condition": "> 30%",
+              "warning_condition": "< 15%",
+              "tracking_frequency": "รายเดือน"
+            },
+            {
+              "kpi_name": "Customer Concentration",
+              "target_condition": "Top 1 < 30% ของรายได้",
+              "warning_condition": "Top 1 > 50%",
+              "tracking_frequency": "รายไตรมาส"
+            },
+            {
+              "kpi_name": "NPS / Review Score",
+              "target_condition": "> 4.5/5",
+              "warning_condition": "< 4.0/5",
+              "tracking_frequency": "รายเดือน"
+            }
+          ]
+        },
+        "D3": {
+          "benchmark_context": "ผลิตภาพรวม (TFP) ของ SME ไทยปี 2024 ติดลบ −0.27 — การวาง SOP และลดการพึ่งเจ้าของช่วยยกระดับผลิตภาพ",
+          "source_ref": "สสว./OSMEP",
+          "kpi_rules": [
+            {
+              "kpi_name": "SOP Coverage",
+              "target_condition": "> 80% ของงาน routine",
+              "warning_condition": "< 50%",
+              "tracking_frequency": "ราย 3 เดือน"
+            },
+            {
+              "kpi_name": "Error / Rework Rate",
+              "target_condition": "< 2%",
+              "warning_condition": "> 5%",
+              "tracking_frequency": "รายสัปดาห์"
+            },
+            {
+              "kpi_name": "Owner Decision Dependency",
+              "target_condition": "< 30% ของ decisions",
+              "warning_condition": "> 60%",
+              "tracking_frequency": "ราย 3 เดือน"
+            }
+          ]
+        },
+        "D4": {
+          "benchmark_context": "อัตราการลาออกโดยสมัครใจเฉลี่ย ~13% ต่อปี (Mercer 2024–25) ระดับสุขภาพดีคือต่ำกว่า 10% ต่อปี (Gallup)",
+          "source_ref": "Mercer; Gallup",
+          "kpi_rules": [
+            {
+              "kpi_name": "Employee Turnover Rate",
+              "target_condition": "< 15%/ปี",
+              "warning_condition": "> 30%/ปี",
+              "tracking_frequency": "รายไตรมาส"
+            },
+            {
+              "kpi_name": "Key Person Backup Coverage",
+              "target_condition": "100% ของ key roles",
+              "warning_condition": "< 50%",
+              "tracking_frequency": "ราย 6 เดือน"
+            },
+            {
+              "kpi_name": "Employee Engagement Score",
+              "target_condition": "> 70%",
+              "warning_condition": "< 50%",
+              "tracking_frequency": "รายไตรมาส"
+            }
+          ]
+        },
+        "D5": {
+          "benchmark_context": "ธุรกิจที่ทนทานมักไม่พึ่งซัพพลายเออร์/ผู้ให้บริการรายเดียวเกิน 40% ของยอดซื้อ และคุมต้นทุนผันแปรให้สมดุลกับรายได้",
+          "source_ref": "แนวปฏิบัติบริหารซัพพลายเชน",
+          "kpi_rules": [
+            {
+              "kpi_name": "Supplier Concentration",
+              "target_condition": "Top 1 < 40%",
+              "warning_condition": "Top 1 > 70%",
+              "tracking_frequency": "รายไตรมาส"
+            },
+            {
+              "kpi_name": "Stockout Incidents",
+              "target_condition": "0 ครั้ง/เดือน",
+              "warning_condition": "> 2 ครั้ง/เดือน",
+              "tracking_frequency": "รายเดือน"
+            },
+            {
+              "kpi_name": "Inventory Days",
+              "target_condition": "15-30 วัน",
+              "warning_condition": "> 60 วัน หรือ < 7 วัน",
+              "tracking_frequency": "รายเดือน"
+            }
+          ]
+        },
+        "D6": {
+          "benchmark_context": "ธุรกิจขนาดเล็กในไทยใช้คอมพิวเตอร์ราว 65% และเข้าถึงอินเทอร์เน็ต ~70% แต่มีเพียง ~13% ที่มีบุคลากรสายไอที — การปิดช่องว่างดิจิทัลคือโอกาส",
+          "source_ref": "ASEAN SME Policy Index 2024",
+          "kpi_rules": [
+            {
+              "kpi_name": "Digital Tool Adoption",
+              "target_condition": "POS + บัญชี + CRM ครบ",
+              "warning_condition": "ไม่มีเครื่องมือดิจิทัลเลย",
+              "tracking_frequency": "ราย 6 เดือน"
+            },
+            {
+              "kpi_name": "Data Backup Status",
+              "target_condition": "Backup อัตโนมัติทุกวัน",
+              "warning_condition": "ไม่มี Backup",
+              "tracking_frequency": "รายสัปดาห์"
+            },
+            {
+              "kpi_name": "Online Revenue %",
+              "target_condition": "> 20% ของยอดขาย",
+              "warning_condition": "0%",
+              "tracking_frequency": "รายเดือน"
+            }
+          ]
+        },
+        "D7": {
+          "benchmark_context": "ธุรกิจขนาดเล็ก 1 ใน 4 มีเงินสดสำรองไม่ถึง 13 วัน จึงเปราะบางต่อเหตุไม่คาดฝัน การมี BCP และระบบควบคุมภายในที่ดีช่วยลดความเสี่ยงนี้",
+          "source_ref": "JPMorgan Chase Institute",
+          "kpi_rules": [
+            {
+              "kpi_name": "Legal & Tax Compliance",
+              "target_condition": "ไม่มีเอกสารค้าง",
+              "warning_condition": "มีเอกสาร/ภาษีค้าง",
+              "tracking_frequency": "ราย 6 เดือน"
+            },
+            {
+              "kpi_name": "Contract Coverage",
+              "target_condition": "ลูกค้า/ซัพพลายเออร์หลักมีสัญญา 100%",
+              "warning_condition": "< 50%",
+              "tracking_frequency": "ราย 6 เดือน"
+            },
+            {
+              "kpi_name": "BCP Readiness",
+              "target_condition": "มีแผนฉุกเฉิน 3 สถานการณ์",
+              "warning_condition": "ไม่มีแผนเลย",
+              "tracking_frequency": "รายปี"
+            }
+          ]
+        }
+      }
+    },
+    "restaurant": {
+      "industry_id": "restaurant",
+      "industry_name": "ร้านอาหาร / คาเฟ่",
+      "weights": {
+        "D1": 0.25,
+        "D2": 0.15,
+        "D3": 0.15,
+        "D4": 0.15,
+        "D5": 0.1,
+        "D6": 0.05,
+        "D7": 0.15
+      },
+      "dimensions": {
+        "D1": {
+          "benchmark_context": "ธุรกิจขนาดเล็กถือเงินสดสำรองมัธยฐาน ~27 วัน แต่ร้านอาหารถือเฉลี่ยเพียง ~16 วัน — ควรตั้งเป้าสำรองค่าใช้จ่ายคงที่อย่างน้อย 2 เดือน",
+          "source_ref": "JPMorgan Chase Institute",
+          "kpi_rules": [
+            {
+              "kpi_name": "Cash Runway",
+              "target_condition": "> 60 วัน (≈ 2 เดือน)",
+              "warning_condition": "< 45 วัน",
+              "tracking_frequency": "รายสัปดาห์"
+            },
+            {
+              "kpi_name": "Gross Margin (Food Cost)",
+              "target_condition": "Food Cost < 35%",
+              "warning_condition": "Food Cost > 50%",
+              "tracking_frequency": "รายเดือน"
+            },
+            {
+              "kpi_name": "Revenue MoM Growth",
+              "target_condition": "> 5%",
+              "warning_condition": "< 0% ติดต่อกัน 2 เดือน",
+              "tracking_frequency": "รายเดือน"
+            }
+          ]
+        },
+        "D5": {
+          "benchmark_context": "สำหรับร้านอาหาร ต้นทุนหลัก (วัตถุดิบ+แรงงาน) ควรคุมไว้ที่ 55–65% ของยอดขาย และไม่พึ่งซัพพลายเออร์วัตถุดิบสดรายเดียวเกิน 40%",
+          "source_ref": "National Restaurant Association, 2024",
+          "kpi_rules": [
+            {
+              "kpi_name": "Prime Cost % (วัตถุดิบ+แรงงาน)",
+              "target_condition": "55–65%",
+              "warning_condition": "> 70%",
+              "tracking_frequency": "รายเดือน"
+            },
+            {
+              "kpi_name": "Supplier Concentration (วัตถุดิบสด)",
+              "target_condition": "Top 1 < 40%",
+              "warning_condition": "Top 1 > 70%",
+              "tracking_frequency": "รายไตรมาส"
+            },
+            {
+              "kpi_name": "Waste / Spoilage Rate",
+              "target_condition": "< 4%",
+              "warning_condition": "> 8%",
+              "tracking_frequency": "รายสัปดาห์"
+            }
+          ]
+        }
+      }
+    },
+    "startup": {
+      "industry_id": "startup",
+      "industry_name": "Startup",
+      "weights": {
+        "D1": 0.2,
+        "D2": 0.15,
+        "D3": 0.15,
+        "D4": 0.15,
+        "D5": 0.05,
+        "D6": 0.15,
+        "D7": 0.15
+      },
+      "dimensions": {
+        "D1": {
+          "benchmark_context": "สตาร์ทอัพควรรักษา Runway ให้มากกว่า 12–18 เดือน และรู้ Burn Rate รายเดือนเสมอ กิจการที่แข็งแรงมักมีสภาพคล่องสำรองสูงกว่าค่ามัธยฐานของ SME ทั่วไป",
+          "source_ref": "JPMorgan Chase Institute; แนวปฏิบัติ VC",
+          "kpi_rules": [
+            {
+              "kpi_name": "Runway (months)",
+              "target_condition": "> 12 เดือน",
+              "warning_condition": "< 6 เดือน",
+              "tracking_frequency": "รายเดือน"
+            },
+            {
+              "kpi_name": "Gross Margin",
+              "target_condition": "> 70%",
+              "warning_condition": "< 50%",
+              "tracking_frequency": "รายเดือน"
+            },
+            {
+              "kpi_name": "MRR/ARR Growth",
+              "target_condition": "> 10% MoM",
+              "warning_condition": "< 0%",
+              "tracking_frequency": "รายเดือน"
+            }
+          ]
+        },
+        "D5": {
+          "benchmark_context": "สำหรับธุรกิจเทค ต้นทุนหลักคือโครงสร้างพื้นฐาน/บริการคลาวด์และค่าธรรมเนียมแพลตฟอร์ม ควรคุม Cloud Cost ให้สัมพันธ์กับรายได้ และไม่พึ่งผู้ให้บริการรายเดียว",
+          "source_ref": "Tech Industry Standards",
+          "kpi_rules": [
+            {
+              "kpi_name": "Vendor Concentration",
+              "target_condition": "เจ้าหลัก < 40%",
+              "warning_condition": "> 70%",
+              "tracking_frequency": "รายไตรมาส"
+            },
+            {
+              "kpi_name": "Cloud/Infra Cost % รายได้",
+              "target_condition": "< 15%",
+              "warning_condition": "> 30%",
+              "tracking_frequency": "รายเดือน"
+            },
+            {
+              "kpi_name": "Gross Margin",
+              "target_condition": "> 70%",
+              "warning_condition": "< 50%",
+              "tracking_frequency": "รายเดือน"
+            }
+          ],
+          "recommendations": {
+            "RED": [
+              "[สัปดาห์ 1] ทำรายงาน Cloud / Infra / API cost ย้อนหลัง 6 เดือน และหาตัวที่โตเร็วผิดปกติ",
+              "[สัปดาห์ 2] ทำ dependency map ของ vendor สำคัญ (cloud, payment gateway, AI API, CRM)",
+              "[เดือน 1] ตั้ง alert เมื่อ cost ต่อผู้ใช้/ต่อทรานแซกชันเกิน threshold ที่กำหนด",
+              "[เดือน 2] เตรียม backup plan หรือ vendor สำรองสำหรับระบบที่ขาดไม่ได้"
+            ],
+            "YELLOW": [
+              "[สัปดาห์ 1] ทำรายงาน Cloud / Infra / API cost ย้อนหลัง 6 เดือน",
+              "[สัปดาห์ 2] ทำ dependency map ของ vendor สำคัญ (cloud, payment, AI API, CRM)",
+              "[เดือน 1] ตั้ง alert เมื่อ cost ต่อผู้ใช้/ต่อทรานแซกชันเกิน threshold",
+              "[เดือน 2] ทดลอง vendor สำรอง/backup plan สำหรับระบบสำคัญ"
+            ],
+            "GREEN": [
+              "[ไตรมาส 1] ทำ FinOps review เพื่อหา cost optimization และ commitment discount",
+              "[ไตรมาส 1] ทดสอบ failover ของ vendor สำรองจริง"
+            ]
+          },
+          "narrative": {
+            "YELLOW": {
+              "summary": "ต้นทุนหลักของธุรกิจคือโครงสร้างพื้นฐานและบริการภายนอก (cloud/API/แพลตฟอร์ม) ซึ่งยังขาดการติดตามอย่างเป็นระบบ",
+              "current_state": "ค่าใช้จ่าย cloud/API เติบโตตามการใช้งาน แต่ยังไม่ได้ติดตามต่อหน่วย (ต่อผู้ใช้/ต่อทรานแซกชัน) และยังพึ่งผู้ให้บริการบางรายโดยไม่มีแผนสำรอง",
+              "root_cause": "ธุรกิจโตเร็วและโฟกัสที่การพัฒนาฟีเจอร์ ทำให้การบริหารต้นทุน (FinOps) และความเสี่ยงด้าน vendor ถูกมองข้าม"
+            },
+            "RED": {
+              "summary": "ต้นทุนโครงสร้างพื้นฐาน/บริการภายนอกกำลังเป็นความเสี่ยง — ไม่มีภาพต้นทุนต่อหน่วยและพึ่ง vendor รายเดียว",
+              "current_state": "ยังไม่รู้ cost ต่อผู้ใช้/ต่อทรานแซกชัน และไม่มีแผนสำรองหากผู้ให้บริการหลักมีปัญหา ทำให้เสี่ยงทั้งด้านต้นทุนและความต่อเนื่อง",
+              "root_cause": "ขาดระบบติดตามต้นทุน (FinOps) และการประเมิน vendor dependency ตั้งแต่ต้น"
+            }
+          }
+        },
+        "D6": {
+          "benchmark_context": "สำหรับสตาร์ทอัพ เทคโนโลยีและข้อมูลคือแกนหลักของธุรกิจ ควรมีระบบสำรองข้อมูลอัตโนมัติและความปลอดภัยไซเบอร์ที่ได้มาตรฐานตั้งแต่ต้น",
+          "source_ref": "Tech Industry Standards",
+          "kpi_rules": [
+            {
+              "kpi_name": "Data Backup Status",
+              "target_condition": "Backup อัตโนมัติทุกวัน",
+              "warning_condition": "ไม่มี Backup",
+              "tracking_frequency": "รายสัปดาห์"
+            },
+            {
+              "kpi_name": "Deployment / Uptime",
+              "target_condition": "Uptime > 99.5%",
+              "warning_condition": "< 99%",
+              "tracking_frequency": "รายเดือน"
+            },
+            {
+              "kpi_name": "Security Posture",
+              "target_condition": "ผ่านมาตรฐานพื้นฐาน",
+              "warning_condition": "ไม่มีมาตรการ",
+              "tracking_frequency": "ราย 6 เดือน"
+            }
+          ],
+          "recommendations": {
+            "RED": [
+              "[สัปดาห์ 1] เปิด MFA สำหรับบัญชีสำคัญทั้งหมด และทบทวนสิทธิ์ admin",
+              "[สัปดาห์ 2] ตั้ง backup อัตโนมัติของข้อมูลสำคัญ + ทดสอบ restore",
+              "[เดือน 1] ทำ access review รอบแรกและถอนสิทธิ์ที่ไม่จำเป็น"
+            ],
+            "YELLOW": [
+              "[สัปดาห์ 1] เปิด MFA บัญชีสำคัญ และทบทวนสิทธิ์ admin",
+              "[เดือน 1] ตั้ง backup อัตโนมัติ + ทดสอบ restore ทุกไตรมาส",
+              "[เดือน 2] วาง observability/monitoring สำหรับระบบหลัก"
+            ],
+            "GREEN": [
+              "[ไตรมาส 1] ทำ access review ตามรอบและซ้อมแผนกู้คืนระบบ (DR drill)"
+            ]
+          }
+        }
+      }
+    },
+    "ecommerce": {
+      "industry_id": "ecommerce",
+      "industry_name": "E-commerce",
+      "weights": {
+        "D1": 0.15,
+        "D2": 0.25,
+        "D3": 0.1,
+        "D4": 0.05,
+        "D5": 0.1,
+        "D6": 0.2,
+        "D7": 0.15
+      },
+      "dimensions": {
+        "D1": {
+          "benchmark_context": "E-commerce ควรคุมต้นทุนค่าโฆษณา/ค่าธรรมเนียมแพลตฟอร์ม และรู้กำไรสุทธิหลังหักค่าใช้จ่ายแปรผันต่อออเดอร์",
+          "source_ref": "JPMorgan Chase Institute",
+          "kpi_rules": [
+            {
+              "kpi_name": "Net Margin after fees",
+              "target_condition": "> 15%",
+              "warning_condition": "< 5%",
+              "tracking_frequency": "รายเดือน"
+            },
+            {
+              "kpi_name": "Cash Runway",
+              "target_condition": "> 90 วัน",
+              "warning_condition": "< 60 วัน",
+              "tracking_frequency": "รายสัปดาห์"
+            },
+            {
+              "kpi_name": "ROAS",
+              "target_condition": "> 3.0x",
+              "warning_condition": "< 1.5x",
+              "tracking_frequency": "รายสัปดาห์"
+            }
+          ]
+        },
+        "D5": {
+          "benchmark_context": "สำหรับ E-commerce ควรคุมต้นทุนสินค้าและค่าโลจิสติกส์/ค่าธรรมเนียมแพลตฟอร์ม และไม่พึ่งซัพพลายเออร์หรือช่องทางขายรายเดียวเกิน 40%",
+          "source_ref": "แนวปฏิบัติ E-commerce",
+          "kpi_rules": [
+            {
+              "kpi_name": "Channel/Supplier Concentration",
+              "target_condition": "Top 1 < 40%",
+              "warning_condition": "Top 1 > 70%",
+              "tracking_frequency": "รายไตรมาส"
+            },
+            {
+              "kpi_name": "Logistics Cost % รายได้",
+              "target_condition": "< 12%",
+              "warning_condition": "> 20%",
+              "tracking_frequency": "รายเดือน"
+            },
+            {
+              "kpi_name": "Inventory Days",
+              "target_condition": "20-45 วัน",
+              "warning_condition": "> 90 วัน",
+              "tracking_frequency": "รายเดือน"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

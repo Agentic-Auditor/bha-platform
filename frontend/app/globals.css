@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #F7F8FB;
+  --foreground: #1F2937;
+
+  /* Brand tokens */
+  --navy:      #050B24;
+  --navy-deep: #0B1B4D;
+  --gold:      #C8963E;
+  --gold-soft: #F4E4C1;
+
+  /* Traffic light */
+  --risk-red:    #DC2626;
+  --risk-yellow: #F59E0B;
+  --risk-green:  #16A34A;
+
+  /* Radii */
+  --radius-card: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-noto-thai), var(--font-inter), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth transitions for interactive elements */
+button, a {
+  transition-property: color, background-color, border-color, box-shadow, transform;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+
+/* Focus ring consistent with navy brand */
+*:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Utility: navy gradient (landing hero) */
+.bg-navy-gradient {
+  background: linear-gradient(135deg, #050B24 0%, #0B1B4D 60%, #0D2260 100%);
+}
+
+/* Utility: gold shimmer line */
+.gold-line {
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #C8963E, transparent);
+}
