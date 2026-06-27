@@ -10,13 +10,13 @@ export default function NorthstarCTA() {
             ต้องการที่ปรึกษาผู้เชี่ยวชาญ?
           </h3>
           <p className="text-white/70 text-sm mt-1 leading-relaxed">
-            Northstar SMEs Health Check — ตรวจสุขภาพธุรกิจเชิงลึก
+            Agentic-Auditor — ตรวจสุขภาพธุรกิจเชิงลึก
             พร้อมแผนปฏิบัติจากผู้เชี่ยวชาญจริง
           </p>
         </div>
       </div>
       <a
-        href="https://nscgroup.site"
+        href="https://www.agentic-auditor.com"
         target="_blank"
         rel="noopener noreferrer"
         className="inline-block w-full text-center px-6 py-2.5 bg-gold text-white text-sm font-semibold rounded-pill shadow-gold hover:brightness-110 transition-all"
